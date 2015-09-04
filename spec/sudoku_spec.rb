@@ -11,4 +11,16 @@ describe "Create and test sudoky" do
       end 
     end
   end
+  
+  context "pupulate_arrays" do
+    it "build structure of 27 arrays after pupulate_arrays" do
+
+      file = File.read("spec/fixtures/valid_complete.sudoku")
+      sudoku = Sudoku.new(file)
+      sudoku.validate
+
+      result = sudoku.structure.length
+      expect(result).to eq 27
+    end
+  end
 end
