@@ -12,6 +12,26 @@ class Sudoku
   end
   def validate
     populate_arrays
+    result = "This sudoku is ";
+    is_valid = true
+    is_complete = true
+
+    @structure.each do |line|
+      is_valid = false if !validate_line(line)
+      is_complete = false if !validate_complete_line(line)
+      break unless is_valid
+    end
+    
+    if is_valid
+      result += "valid"
+    else
+      result += "invalid"
+    end
+    if is_valid && !is_complete
+      result += ", but incomplete"
+    end
+  
+    result +="."
   end
 
   def validate_line(line)
@@ -28,7 +48,7 @@ class Sudoku
     }
     line.split(//).each do |char|
       next if char == '0'
-      return false if hash[char] == char || hash[char] == nil
+      return false if hash[char] != ''
       hash[char] = char
     end
     true
@@ -52,7 +72,7 @@ class Sudoku
       hash[char] = char
     end
     hash.keys.each do |key|
-      return false if hash[key] != key
+      return false if hash[key] == ''
     end
     true
   end
@@ -63,7 +83,7 @@ class Sudoku
     arr_ver = ["","","","","","","","",""]
 
     @structure.each_index do |index|
-      if (index+1) % 3 == 0  
+      if (index > 0 && (index) % 3 == 0 )
         @structure += arr
         arr = ["","",""]
       end
@@ -74,6 +94,7 @@ class Sudoku
         arr_ver[column] += @structure[index].slice(column)
       end
     end
+    @structure += arr
     @structure += arr_ver
   end
   

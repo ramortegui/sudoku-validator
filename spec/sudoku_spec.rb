@@ -1,5 +1,5 @@
 require_relative '../lib/sudoku.rb'
-describe "Create and test sudoky" do
+describe "Create and test sudoku" do
   context "create a sudoku" do
     it "returns a valid sudoku structure represented by an array of 9 strings of 9 characters" do
       file = File.read("spec/fixtures/valid_complete.sudoku")
@@ -35,6 +35,13 @@ describe "Create and test sudoky" do
       result = sudoku.validate_line('011000000')
       expect(result).to eq false 
     end
+
+    it "return false if the line fit into sudoku line" do
+      sudoku = Sudoku.new("")
+      result = sudoku.validate_line('880002400')
+      expect(result).to eq false 
+    end
+
   end
 
   context "validate_complete_line" do
