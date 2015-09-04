@@ -36,4 +36,17 @@ describe "Create and test sudoky" do
       expect(result).to eq false 
     end
   end
+
+  context "validate_complete_line" do
+    it "return true if the line is complete" do
+      sudoku = Sudoku.new("")
+      result = sudoku.validate_complete_line('123456789')
+      expect(result).to eq true 
+    end
+    it "return false if the line is not complete" do
+      sudoku = Sudoku.new("")
+      result = sudoku.validate_complete_line('123056789')
+      expect(result).to eq false 
+    end
+  end
 end
