@@ -14,6 +14,26 @@ class Sudoku
     populate_arrays
   end
 
+  def validate_line(line)
+    hash = {
+      '1' => '',
+      '2' => '',
+      '3' => '',
+      '4' => '',
+      '5' => '',
+      '6' => '',
+      '7' => '',
+      '8' => '',
+      '9' => '',
+    }
+    line.split(//).each do |char|
+      next if char == '0'
+      return false if hash[char] == char || hash[char] == nil
+      hash[char] = char
+    end
+    true
+  end
+
   private
   def populate_arrays
     arr = ["","",""]

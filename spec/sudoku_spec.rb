@@ -23,4 +23,17 @@ describe "Create and test sudoky" do
       expect(result).to eq 27
     end
   end
+
+  context "validate_line" do
+    it "return true if the line fit into sudoku line" do
+      sudoku = Sudoku.new("")
+      result = sudoku.validate_line('000000000')
+      expect(result).to eq true
+    end
+    it "return false if the line fit into sudoku line" do
+      sudoku = Sudoku.new("")
+      result = sudoku.validate_line('011000000')
+      expect(result).to eq false 
+    end
+  end
 end
